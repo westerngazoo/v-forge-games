@@ -14,7 +14,7 @@ let gameState = 'START'; // START, PLAYING, GAMEOVER
 let score = 0;
 let highScore = localStorage.getItem('voidRunnerHighScore') || 0;
 let frameCount = 0;
-let gameSpeed = 3.5;
+let gameSpeed = 2.5; // Nintendo easy: very slow speed
 
 highScoreEl.innerText = highScore;
 
@@ -25,8 +25,8 @@ const player = {
     width: 30,
     height: 50,
     dy: 0,
-    jumpPower: -12,
-    gravity: 0.6,
+    jumpPower: -9,      // Nintendo easy: smaller initial burst
+    gravity: 0.25,      // Nintendo easy: very floaty gravity
     grounded: false,
     color: '#00f0ff',
     
@@ -75,8 +75,8 @@ const obstacleColor = '#f70776';
 
 class Obstacle {
     constructor() {
-        this.width = Math.random() * 20 + 20;
-        this.height = Math.random() * 40 + 30;
+        this.width = Math.random() * 10 + 15;  // Nintendo easy: much smaller
+        this.height = Math.random() * 20 + 20; // Nintendo easy: shorter
         this.x = canvas.width;
         this.y = canvas.height - 20 - this.height;
         this.color = obstacleColor;
@@ -144,7 +144,8 @@ function handleParticles() {
 }
 
 function handleObstacles() {
-    if (frameCount % Math.floor(Math.random() * 80 + 100) === 0) {
+    // Nintendo easy: extremely rare obstacle spawning
+    if (frameCount % Math.floor(Math.random() * 150 + 150) === 0) {
         obstacles.push(new Obstacle());
     }
     

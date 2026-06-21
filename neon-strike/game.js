@@ -29,13 +29,13 @@ const player = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 15,
-    speed: 5,
-    health: 200,
-    maxHealth: 200,
+    speed: 8,       // Nintendo easy: fast player
+    health: 1000,   // Nintendo easy: huge health pool
+    maxHealth: 1000,
     color: '#00f0ff',
     angle: 0,
     lastShot: 0,
-    fireRate: 5, // frames between shots
+    fireRate: 3,    // Nintendo easy: crazy fast shooting
     
     update() {
         if (keys.w && this.y > this.radius) this.y -= this.speed;
@@ -130,7 +130,7 @@ class Enemy {
         this.x = x;
         this.y = y;
         this.radius = Math.random() * 10 + 10;
-        this.speed = Math.random() * 0.5 + (0.2 * wave);
+        this.speed = Math.random() * 0.2 + 0.1; // Nintendo easy: incredibly slow enemies
         this.color = '#ff0055';
         this.health = this.radius * 2;
     }
@@ -246,7 +246,8 @@ function gameLoop() {
     player.draw();
     
     // Wave management
-    if (frameCount % Math.max(90 - (wave * 5), 40) === 0) {
+    // Nintendo easy: enemies spawn very rarely
+    if (frameCount % Math.max(150 - (wave * 2), 80) === 0) {
         spawnEnemy();
     }
     
@@ -313,7 +314,7 @@ function gameLoop() {
         const dist = Math.hypot(dx, dy);
         
         if (dist < player.radius + enemies[i].radius) {
-            player.takeDamage(enemies[i].radius);
+            player.takeDamage(10); // Nintendo easy: take tiny damage
             createExplosion(enemies[i].x, enemies[i].y, enemies[i].color);
             enemies.splice(i, 1);
         }

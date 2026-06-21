@@ -23,11 +23,11 @@ let turnCount = 0;
 const player = {
     x: 200,
     y: 250,
-    hp: 100,
-    maxHp: 100,
-    mp: 50,
-    maxMp: 50,
-    attackPower: 15,
+    hp: 999,      // Nintendo easy: huge HP
+    maxHp: 999,
+    mp: 100,
+    maxMp: 100,
+    attackPower: 50, // Nintendo easy: massive damage
     defense: 0,
     isDefending: false,
     
@@ -77,16 +77,17 @@ const player = {
 let enemy = createEnemy();
 
 function createEnemy() {
+    // Nintendo easy: enemies have tiny health and do no damage
     const types = [
-        { name: 'CORRUPT_NODE', hp: 50, atk: 10, shape: 'diamond' },
-        { name: 'VIRUS_WORM', hp: 30, atk: 20, shape: 'snake' },
-        { name: 'TROJAN_HORSE', hp: 80, atk: 15, shape: 'box' }
+        { name: 'CORRUPT_NODE', hp: 10, atk: 1, shape: 'diamond' },
+        { name: 'VIRUS_WORM', hp: 5, atk: 2, shape: 'snake' },
+        { name: 'TROJAN_HORSE', hp: 20, atk: 1, shape: 'box' }
     ];
     const type = types[Math.floor(Math.random() * types.length)];
     
-    // Scale up slightly based on kill count
-    const hpScale = 1 + (killCount * 0.2);
-    const atkScale = 1 + (killCount * 0.1);
+    // Scale up very slowly
+    const hpScale = 1 + (killCount * 0.05);
+    const atkScale = 1 + (killCount * 0.05);
     
     return {
         x: 600,
@@ -243,7 +244,7 @@ function executeAction(action) {
     else if (action === 'heal') {
         if (player.mp >= 10) {
             player.mp -= 10;
-            let heal = 30;
+            let heal = 500; // Nintendo easy: full heal essentially
             player.hp += heal;
             if (player.hp > player.maxHp) player.hp = player.maxHp;
             log(`PLAYER EXECUTED REPAIR PROTOCOL. Recovered ${heal} HP.`);
