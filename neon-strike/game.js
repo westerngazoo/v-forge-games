@@ -30,12 +30,12 @@ const player = {
     y: canvas.height / 2,
     radius: 15,
     speed: 5,
-    health: 100,
-    maxHealth: 100,
+    health: 200,
+    maxHealth: 200,
     color: '#00f0ff',
     angle: 0,
     lastShot: 0,
-    fireRate: 10, // frames between shots
+    fireRate: 5, // frames between shots
     
     update() {
         if (keys.w && this.y > this.radius) this.y -= this.speed;
@@ -130,7 +130,7 @@ class Enemy {
         this.x = x;
         this.y = y;
         this.radius = Math.random() * 10 + 10;
-        this.speed = Math.random() * 1 + (0.5 * wave);
+        this.speed = Math.random() * 0.5 + (0.2 * wave);
         this.color = '#ff0055';
         this.health = this.radius * 2;
     }
@@ -246,7 +246,7 @@ function gameLoop() {
     player.draw();
     
     // Wave management
-    if (frameCount % Math.max(60 - (wave * 5), 20) === 0) {
+    if (frameCount % Math.max(90 - (wave * 5), 40) === 0) {
         spawnEnemy();
     }
     

@@ -16,7 +16,7 @@ const killCountEl = document.getElementById('kill-count');
 const endMessageEl = document.getElementById('end-message');
 
 // Game State
-let gameState = 'START'; // START, PLAYER_TURN, ENEMY_TURN, GAMEOVER
+let gameState = 'START'; // START, PLAYER_TURN, ENEMY_TURN, WAITING, GAMEOVER
 let killCount = 0;
 let turnCount = 0;
 
@@ -201,34 +201,29 @@ function enemyTurn() {
     setTimeout(() => {
         if (!enemy || enemy.hp <= 0) return;
         
-        log(`${enemy.name} prepares to attack...`);
+        let dmg = enemy.attackPower + Math.floor(Math.random() * 5);
+        if (player.isDefending) {
+            dmg = Math.floor(dmg / 2);
+            log(`PLAYER DEFLECTED. Received ${dmg} damage.`);
+        } else {
+            log(`${enemy.name} strikes for ${dmg} damage!`);
+        }
         
-        setTimeout(() => {
-            let dmg = enemy.attackPower + Math.floor(Math.random() * 5);
-            if (player.isDefending) {
-                dmg = Math.floor(dmg / 2);
-                log(`PLAYER DEFLECTED ATTACK. Received ${dmg} damage.`);
-            } else {
-                log(`${enemy.name} strikes for ${dmg} damage!`);
-            }
-            
-            player.hp -= dmg;
-            if (player.hp < 0) player.hp = 0;
-            
+        player.hp -= dmg;
+        if (player.hp < 0) player.hp = 0;
+        
+        updateUI();
+        
+        if (player.hp <= 0) {
+            gameOver();
+        } else {
+            gameState = 'PLAYER_TURN';
+            player.isDefending = false;
+            turnCount++;
             updateUI();
-            
-            if (player.hp <= 0) {
-                gameOver();
-            } else {
-                gameState = 'PLAYER_TURN';
-                player.isDefending = false;
-                turnCount++;
-                updateUI();
-                log('AWAITING PLAYER INPUT...');
-            }
-        }, 1000);
-        
-    }, 1000);
+            log('AWAITING PLAYER INPUT...');
+        }
+    }, 500);
 }
 
 function executeAction(action) {
@@ -258,17 +253,18 @@ function executeAction(action) {
     updateUI();
     
     if (enemy.hp <= 0) {
+        gameState = 'WAITING'; // Prevent extra clicks
         log(`ENTITY ${enemy.name} TERMINATED.`);
         enemy.hp = 0;
         updateUI();
         
         // Regain some stats
-        player.hp += 10;
+        player.hp += 20; // Increased healing
         if(player.hp > player.maxHp) player.hp = player.maxHp;
-        player.mp += 10;
+        player.mp += 15; // Increased MP regen
         if(player.mp > player.maxMp) player.mp = player.maxMp;
         
-        setTimeout(spawnNextEnemy, 1500);
+        setTimeout(spawnNextEnemy, 1000);
     } else {
         enemyTurn();
     }
@@ -290,7 +286,12 @@ function initGame() {
     gameState = 'PLAYER_TURN';
     log('SIMULATION INITIALIZED. AWAITING INPUT...');
     updateUI();
-    render();
+    
+    // Only start render loop once
+    if (!window.renderLoopStarted) {
+        window.renderLoopStarted = true;
+        render();
+    }
 }
 
 function gameOver() {

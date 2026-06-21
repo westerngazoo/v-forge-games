@@ -14,7 +14,7 @@ let gameState = 'START'; // START, PLAYING, GAMEOVER
 let score = 0;
 let highScore = localStorage.getItem('voidRunnerHighScore') || 0;
 let frameCount = 0;
-let gameSpeed = 5;
+let gameSpeed = 3.5;
 
 highScoreEl.innerText = highScore;
 
@@ -144,7 +144,7 @@ function handleParticles() {
 }
 
 function handleObstacles() {
-    if (frameCount % Math.floor(Math.random() * 60 + 60) === 0) {
+    if (frameCount % Math.floor(Math.random() * 80 + 100) === 0) {
         obstacles.push(new Obstacle());
     }
     
