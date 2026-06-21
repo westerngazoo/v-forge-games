@@ -1,0 +1,149 @@
+:root {
+    --bg-color: #050510;
+    --neon-blue: #00f0ff;
+    --neon-pink: #ff0055;
+    --neon-green: #00ff66;
+    --neon-yellow: #fffa00;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--neon-blue);
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.2);
+    overflow: hidden;
+    background: radial-gradient(circle at center, #101020 0%, #050510 100%);
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.hud-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#health-bar {
+    width: 150px;
+    height: 15px;
+    background: rgba(255, 0, 85, 0.2);
+    border: 1px solid var(--neon-pink);
+    box-shadow: 0 0 5px var(--neon-pink);
+}
+
+#health-fill {
+    width: 100%;
+    height: 100%;
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+    transition: width 0.2s ease;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.85);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+h1 {
+    font-size: 64px;
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+#game-over-screen h1 {
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-yellow);
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+button {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--neon-blue);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+    border: 1px solid var(--neon-blue);
+    padding: 15px 50px;
+    cursor: pointer;
+    text-shadow: 0 0 5px var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), inset 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+button:active {
+    transform: scale(0.98);
+}

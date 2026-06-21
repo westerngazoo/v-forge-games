@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Strike</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="ui-layer">
+            <div id="hud">
+                <div class="hud-item">SCORE: <span id="score">0</span></div>
+                <div class="hud-item">WAVE: <span id="wave">1</span></div>
+                <div class="hud-item">HEALTH: <div id="health-bar"><div id="health-fill"></div></div></div>
+            </div>
+            
+            <div id="start-screen" class="screen active">
+                <h1>NEON STRIKE</h1>
+                <p>WASD to Move | Mouse to Aim & Shoot</p>
+                <button id="start-btn">ENGAGE</button>
+            </div>
+            
+            <div id="game-over-screen" class="screen">
+                <h1>HULL BREACH DETECTED</h1>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">RESTART MISSION</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe RPG</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container" class="crt">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        
+        <div id="ui-layer">
+            <div id="combat-log"></div>
+            
+            <div id="stats-panel">
+                <div class="entity-stats" id="player-stats">
+                    <h2>PLAYER</h2>
+                    <div class="bar-container"><div id="player-hp" class="bar hp-bar"></div></div>
+                    <div class="bar-container"><div id="player-mp" class="bar mp-bar"></div></div>
+                </div>
+                <div class="entity-stats" id="enemy-stats">
+                    <h2 id="enemy-name">GLITCH_ENTITY</h2>
+                    <div class="bar-container"><div id="enemy-hp" class="bar hp-bar"></div></div>
+                </div>
+            </div>
+            
+            <div id="action-menu">
+                <button class="action-btn" data-action="attack">ATTACK</button>
+                <button class="action-btn" data-action="defend">DEFEND</button>
+                <button class="action-btn" data-action="heal">REPAIR (MP)</button>
+            </div>
+            
+            <div id="start-screen" class="screen active">
+                <h1>WIREFRAME RPG</h1>
+                <p>SIMULATION BOOT SEQUENCE...</p>
+                <button id="start-btn">INITIALIZE</button>
+            </div>
+            
+            <div id="game-over-screen" class="screen">
+                <h1 id="end-message">SIMULATION TERMINATED</h1>
+                <p>Entities Defeated: <span id="kill-count">0</span></p>
+                <button id="restart-btn">REBOOT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

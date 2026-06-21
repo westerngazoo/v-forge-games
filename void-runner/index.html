@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void Runner</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <div id="background">
+            <div id="sun"></div>
+            <div id="grid"></div>
+        </div>
+        
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        
+        <div id="ui-layer">
+            <div id="score-display">SCORE: <span id="score">0</span></div>
+            <div id="high-score-display">HI: <span id="high-score">0</span></div>
+            
+            <div id="start-screen" class="screen active">
+                <h1>VOID RUNNER</h1>
+                <p>Press <span class="key">SPACE</span> or <span class="key">UP</span> to jump</p>
+                <button id="start-btn">INITIALIZE</button>
+            </div>
+            
+            <div id="game-over-screen" class="screen">
+                <h1>SYSTEM FAILURE</h1>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">REBOOT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
